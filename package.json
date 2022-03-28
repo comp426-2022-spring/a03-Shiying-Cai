@@ -2,7 +2,6 @@
   "name": "a03-shiying-cai",
   "version": "1.0.0",
   "description": "coin flips API",
-  "main": "index.js",
   "scripts": {
     "test": "node server.js --port=5555"
   },
@@ -22,4 +21,5 @@
     "minimist": "^1.2.5",
     "node-libcurl": "^2.3.4"
   }
+  
 }

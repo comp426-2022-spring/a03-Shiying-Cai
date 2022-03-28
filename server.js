@@ -1,13 +1,6 @@
-//create server
-
-const  http = require("http")
-
 //Require express.js
-const express = require('express')
+const express = require('express');
 const app = express()
-
-//import functions 
-import { coinFlip, coinFlips, countFlips, flipACoin } from './coin.mjs'
 
 //take an arbitrary port number from argument. default = 5000
 const args = require('minimist')(process.argv.slice(2))
@@ -17,7 +10,6 @@ if(args.port == undefined) {
 }
 var HTTP_PORT = args.port;
 
-//start an app server
 const server = app.listen(HTTP_PORT, () => {
     console.log('App lisenting on port %PORT%' .replace('%PORT%',HTTP_PORT))
 });
@@ -59,3 +51,56 @@ app.get('/app/flips/:number', (req, res) => {
 app.get('/app/flips/call/:guess', (req, res) => {
     res.statusCode(200).json(flipACoin(req.params['guess']))
 })
+
+function coinFlip() {
+    let rand = Math.floor(Math.random() * 2);
+    if(rand == 1){
+      return "heads";
+    } 
+    else{
+      return "tails";
+    }
+  }
+
+  function coinFlips(flips) {
+    const results = [];
+    for( let i = 0; i < flips; i++ ){
+      results[i] = coinFlip();
+    }
+    return results;
+  }
+
+  function countFlips(array) {
+    let head = 0;
+    let tail = 0;
+  
+    for(let i = 0; i < array.length; i++){
+      if(array[i] == 'heads'){
+        head++;
+      }
+      if(array[i] == 'tails'){
+        tail++;
+      }
+    }
+  
+    if (head == 0) {
+      return {"tails": tail};
+    }
+    else if (tail == 0) {
+      return {"heads": head};
+    }
+  
+    return {'heads': head, 'tails': tail}
+  }
+
+  function flipACoin(call) {
+    let f = coinFlip();
+    let r = "";
+    if(call == f){
+      r = "win";
+    } else{
+      r = "lose";
+    }
+    let callResult = `{ call: '${call}', flip: '${f}', result: '${r}' }`;
+    return callResult;
+  }
