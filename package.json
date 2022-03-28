@@ -18,7 +18,7 @@
   "dependencies": {
     "curl": "^0.1.4",
     "express": "^4.17.3",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "node-libcurl": "^2.3.4"
   }
   
