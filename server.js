@@ -48,8 +48,7 @@ function flipACoin(call) {
       r = "lose";
     }
     
-    //let callResult = { call: '${call}', flip: '${f}', result: '${r}' }
-    let callResult = { call: call , flip: f , result: r }
+    let callResult = { call: '${call}', flip: '${f}', result: '${r}' }
     return callResult;
   }
   
