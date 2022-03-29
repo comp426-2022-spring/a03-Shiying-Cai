@@ -1,3 +1,5 @@
+const http = require('http')
+  
 //Require express.js
 const express = require('express');
 const app = express()
@@ -15,10 +17,6 @@ const server = app.listen(HTTP_PORT, () => {
 });
 
 
-//define defualt end point that are not defined "404 NOT FOUND"
-app.use(function(req, res){
-    res.status(404).send('404 NOT FOUND')
-});
 
 //Define check endpoint at /app/ return '200 OK'
 app.get('/app/', (req, res) => {
@@ -62,7 +60,7 @@ function coinFlip() {
     }
   }
 
-  function coinFlips(flips) {
+function coinFlips(flips) {
     const results = [];
     for( let i = 0; i < flips; i++ ){
       results[i] = coinFlip();
@@ -70,7 +68,7 @@ function coinFlip() {
     return results;
   }
 
-  function countFlips(array) {
+function countFlips(array) {
     let head = 0;
     let tail = 0;
   
@@ -93,7 +91,7 @@ function coinFlip() {
     return {'heads': head, 'tails': tail}
   }
 
-  function flipACoin(call) {
+function flipACoin(call) {
     let f = coinFlip();
     let r = "";
     if(call == f){
@@ -104,3 +102,9 @@ function coinFlip() {
     let callResult = `{ call: '${call}', flip: '${f}', result: '${r}' }`;
     return callResult;
   }
+
+
+  //define defualt end point that are not defined "404 NOT FOUND"
+app.use(function(req, res){
+    res.status(404).send('404 NOT FOUND')
+});
