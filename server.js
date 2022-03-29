@@ -47,7 +47,7 @@ function flipACoin(call) {
     } else{
       r = "lose";
     }
-    let callResult = `{ call: '${call}', flip: '${f}', result: '${r}' }`;
+    let callResult = { call: '${call}', flip: '${f}', result: '${r}' }
     return callResult;
   }
   
@@ -83,7 +83,7 @@ app.get('/app/', (req, res) => {
 
 // Endpoint /app/flip/ that returns JSON {"flip":"heads"} or {"flip":"tails"} corresponding to the results of the random coin flip.
 app.get('/app/flip', (req, res) => {
-    res.status(200).json({"flips" : coinFlip()})
+    res.status(200).json({"flip" : coinFlip()})
 })
 
 //Endpoint /app/flips/:number that returns JSON including an array of the raw random flips and a summary. 
@@ -94,12 +94,12 @@ $ curl http://localhost:5000/app/flips/20
 */
 app.get('/app/flips/:number', (req, res) => {
     var array = coinFlips(req.params['number'])
-    res.status(200).json({"raw" : array, "summary" : countFlips })
+    res.status(200).json({"raw" : array, "summary" : countFlips(array) })
 })
 
 // Endpoint /app/flip/call/heads that returns the result of a random flip match against heads or tails as JSON
 app.get('/app/flip/call/:guess', (req, res) => {
-    res.status(200).json(flipACoin(req.params['guess']))
+    res.status(200).json(flipACoin(req.params.guess))
 })
 
 // define defualt end point that are not defined "404 NOT FOUND"
